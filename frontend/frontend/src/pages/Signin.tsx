@@ -13,12 +13,12 @@ export default function Signin() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('http://localhost:8787/api/v1/user/signin', {
+      const res = await axios.post('http://127.0.0.1:8787/api/v1/user/signin', {
         email,
         password,
       });
       localStorage.setItem('token', res.data.jwt);
-      navigate('/');
+      navigate('/create-post');
     } catch (err: any) {
       setError(err.response?.data?.error || 'Signin failed');
     }

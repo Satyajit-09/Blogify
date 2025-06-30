@@ -2,9 +2,7 @@ import { Hono } from 'hono';
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { sign } from 'hono/jwt';
-import bcrypt from 'bcryptjs';
 import { signupInput, signinInput } from '../../../common/src';
-
 
 export const userRouter = new Hono<{
   Bindings: {
@@ -36,10 +34,9 @@ userRouter.post('/signup', async (c) => {
       return c.json({ success: false, error: "Email already registered" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
+    // ⚠️ Storing plain passwords - not safe in production!
     const user = await prisma.user.create({
-      data: { email, password: hashedPassword, name },
+      data: { email, password, name },
     });
 
     const token = await sign({ id: user.id }, c.env.JWT_SECRET);
@@ -67,7 +64,8 @@ userRouter.post('/signin', async (c) => {
 
     const user = await prisma.user.findUnique({ where: { email } });
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+    // ✅ Simple text comparison
+    if (!user || password !== user.password) {
       c.status(403);
       return c.json({ success: false, error: "Invalid email or password" });
     }
@@ -81,6 +79,7 @@ userRouter.post('/signin', async (c) => {
     return c.json({ success: false, error: "Internal Server Error" });
   }
 });
+
 
 
 

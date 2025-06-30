@@ -10,7 +10,7 @@ export default function CreatePost() {
   const handleSubmit = async () => {
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:8787/api/v1/book/', { title, content }, {
+      await axios.post('http://127.0.0.1:8787/api/v1/book/', { title, content }, {
         headers: {
           Authorization: `Bearer ${token}`
         }

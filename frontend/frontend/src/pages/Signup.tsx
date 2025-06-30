@@ -7,7 +7,7 @@ export default function Signup() {
   const [form, setForm] = useState({ email: '', password: '', name: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
+    
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -16,9 +16,9 @@ export default function Signup() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('http://localhost:8787/api/v1/user/signup', form);
+      const res = await axios.post('http://127.0.0.1:8787/api/v1/user/signup', form);
       localStorage.setItem('token', res.data.jwt);
-      navigate('/');
+      navigate('/create-post');
     } catch (err: any) {
       setError(err.response?.data?.error || 'Signup failed');
     }
