@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.10.2",
+    "@prisma/extension-accelerate": "^0.6.3",
+    "bcrypt": "^6.0.0",
+    "hono": "^4.0.5",
+    "prisma": "^5.10.2"
+    
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240208.0",
+    "@types/bcryptjs": "^2.4.6",
+    "wrangler": "^4.22.0"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "```\r npm install\r npm run dev\r ```",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
