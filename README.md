@@ -1,4 +1,4 @@
-Blogify
+
 Blogify is a full-stack blog application that allows users to securely sign up, sign in, create blog posts, edit them, and view them. It's built with modern serverless technologies and a smooth React + Tailwind frontend.
 
 ⚙️ Tech Stack
